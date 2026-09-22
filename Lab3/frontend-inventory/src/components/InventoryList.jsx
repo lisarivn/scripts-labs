@@ -2,16 +2,22 @@
 
 import { useEffect, useState } from 'react';
 
+
 export default function InventoryList() {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [search, setSearch] = useState('');
 
     useEffect(() => {
         async function loadItems() {
             try {
                 const response = await fetch(
                     `${process.env.NEXT_PUBLIC_API_URL}/inventory`
+                );
+
+                const filteredItems = items.filter((item) =>
+                    item.name.toLowerCase().includes(search.toLowerCase())
                 );
 
                 if (!response.ok) {
@@ -31,6 +37,10 @@ export default function InventoryList() {
         loadItems();
     }, []);
 
+    const filteredItems = items.filter((item) =>
+    item.name.toLowerCase().includes(search.toLowerCase())
+);
+
     if (loading) return <p>Завантаження інвентарю...</p>;
     if (error) return <p role="alert">{error}</p>;
 
@@ -40,11 +50,19 @@ export default function InventoryList() {
                 Система інвентаризації
             </h2>
 
-            {items.length === 0 ? (
+            <input
+                type="text"
+                placeholder="Пошук товару..."
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                className="mb-4 w-full rounded border p-2"
+            />
+
+            {filteredItems.length === 0 ? (
                 <p>Інвентар порожній.</p>
             ) : (
                 <ul className="list-disc pl-5">
-                    {items.map((item) => (
+                    {filteredItems.map((item) => (
                         <li key={item.id ?? item._id}>
                             {item.name} — <strong>{item.quantity} шт.</strong>
                         </li>

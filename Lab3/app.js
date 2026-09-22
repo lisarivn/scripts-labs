@@ -1,9 +1,12 @@
 import express from 'express';
 import inventoryRouter from './src/inventory/inventory.routes.js';
+import cors from 'cors';
 
 const app = express();
 
 app.use(express.json());
+
+app.use(cors({ origin: 'http://localhost:3000' }));
 
 app.get('/', (req, res) => {
     res.status(200).send('Hello World');

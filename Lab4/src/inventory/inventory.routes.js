@@ -1,14 +1,12 @@
-import { Router } from 'express'; 
+import { Router } from 'express';
 import {
     createItem,
-    getItems,
-    getItemById
+    getItems
 } from './inventory.controller.js';
- 
-const router = Router(); 
- 
-router.get('/', getItems); 
-router.post('/', createItem); 
-router.get('/:id', getItemById);
- 
-export default router; 
+
+const router = Router();
+
+router.get('/', getItems);
+router.post('/', createItem);
+
+export default router;

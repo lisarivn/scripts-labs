@@ -13,6 +13,19 @@ export async function getItems(req, res, next) {
     }
 }
 
+export async function getItemById(req, res, next) {
+    try {
+        const item = await inventoryService.getItemById(req.params.id);
+
+        return res.status(200).json({
+            success: true,
+            data: item
+        });
+    } catch (error) {
+        return next(error);
+    }
+}
+
 export async function createItem(req, res, next) {
     try {
         const item = await inventoryService.createItem(req.body);

@@ -9,6 +9,18 @@ export class InventoryService {
         return this.repository.findAll();
     }
 
+    async getItemById(id) {
+        const item = await this.repository.findById(id);
+
+        if (!item) {
+            const error = new Error('Товар не знайдено');
+            error.statusCode = 404;
+            throw error;
+        }
+
+        return item;
+    }
+
     async createItem(data = {}) {
         const name = typeof data.name === 'string'
             ? data.name.trim()

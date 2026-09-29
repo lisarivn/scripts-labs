@@ -1,5 +1,5 @@
 {
-  "name": "lab2",
+  "name": "lab5",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -20,5 +20,11 @@
     "jest": "^30.5.1",
     "supertest": "^7.2.2"
   },
-  "type": "module"
+  "type": "module",
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/frontend-inventory/"
+    ]
+  }
 }

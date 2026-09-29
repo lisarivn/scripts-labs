@@ -1,5 +1,4 @@
 import { jest } from '@jest/globals';
-import { render, screen, waitFor } from '@testing-library/react';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import InventoryList from './InventoryList';
 

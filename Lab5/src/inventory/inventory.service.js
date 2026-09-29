@@ -9,6 +9,10 @@ export class InventoryService {
         return this.repository.findAll();
     }
 
+    getStats() {
+        return this.repository.getStats();
+    }
+
     async getItemById(id) {
         const item = await this.repository.findById(id);
 

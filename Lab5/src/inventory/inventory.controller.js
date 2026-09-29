@@ -13,6 +13,19 @@ export async function getItems(req, res, next) {
     }
 }
 
+export async function getStats(req, res, next) {
+    try {
+        const stats = await inventoryService.getStats();
+
+        return res.status(200).json({
+            success: true,
+            data: stats
+        });
+    } catch (error) {
+        return next(error);
+    }
+}
+
 export async function getItemById(req, res, next) {
     try {
         const item = await inventoryService.getItemById(req.params.id);
